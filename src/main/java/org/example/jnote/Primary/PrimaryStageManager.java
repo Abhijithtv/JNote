@@ -3,6 +3,7 @@ package org.example.jnote.Primary;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import org.example.jnote.AccessLayer;
 
 public class PrimaryStageManager {
     private final PrimaryMenu _primaryMenu;
@@ -13,6 +14,7 @@ public class PrimaryStageManager {
     private PrimaryStageManager(){
         _primaryMenu = new PrimaryMenu();
         _primaryTextArea = new PrimaryTextArea();
+        AccessLayer.primaryTextArea = _primaryTextArea;
     }
 
     public static PrimaryStageManager GetInstance(){
@@ -29,6 +31,7 @@ public class PrimaryStageManager {
 
     public PrimaryStageManager setStage(Stage stage){
         this._stage = stage;
+        AccessLayer.stage = stage;
         return this;
     }
 

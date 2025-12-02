@@ -10,5 +10,5 @@ public class AccessLayer {
     public static Stage stage;
     public static PrimaryTextArea primaryTextArea;
     public static File file;
-    public static TextArea textArea;
+    public static DependencyResolver DI;
 }

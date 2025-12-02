@@ -55,6 +55,7 @@ public class PrimaryStageManager {
     public PrimaryStageManager setScene(){
         HBox menuBox = _getMenuBox();
         AnchorPane textBox = _getTextBoxPane();
+
         VBox vBox = new VBox();
         VBox.setVgrow(textBox, Priority.ALWAYS);
         vBox.getChildren().add(menuBox);

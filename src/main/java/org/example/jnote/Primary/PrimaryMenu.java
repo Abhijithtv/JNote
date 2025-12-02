@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import org.example.jnote.AccessLayer;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -39,7 +40,14 @@ public class PrimaryMenu {
         var open = new Button("Open");
         _optionList.add(open);
 
-        save.setOnAction(x-> System.out.println("Click detected"));
+        save.setOnAction(x-> {
+            var file = AccessLayer.file;
+            try {
+                writeToFile(file, AccessLayer.primaryTextArea.getPrimaryTextArea().getText());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         open.setOnAction(x -> {
             try {
@@ -50,10 +58,16 @@ public class PrimaryMenu {
         });
     }
 
+    private void writeToFile(File file, String text) throws IOException {
+        var fileObj = Path.of(file.getPath());
+        Files.writeString(fileObj, text);
+    }
+
     private void triggerOpen() throws IOException {
         FileChooser fil_chooser = new FileChooser();
         var file = fil_chooser.showOpenDialog(AccessLayer.stage);
         if(file != null && file.canRead()){
+            AccessLayer.file = file;
             AccessLayer.primaryTextArea.getPrimaryTextArea().clear();
             Files.lines(Path.of(file.getPath()))
                     .forEach(x-> {

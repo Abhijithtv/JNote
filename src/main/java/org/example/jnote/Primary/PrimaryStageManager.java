@@ -5,6 +5,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.example.jnote.AccessLayer;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class PrimaryStageManager {
     private final PrimaryMenu _primaryMenu;
     private final PrimaryTextArea _primaryTextArea;
@@ -56,10 +59,19 @@ public class PrimaryStageManager {
         HBox menuBox = _getMenuBox();
         AnchorPane textBox = _getTextBoxPane();
 
+        VBox sidebar = new VBox();
+        sidebar.setPrefWidth(150);
+        sidebar.setStyle("-fx-background-color: #333;");
+
+
         VBox vBox = new VBox();
-        VBox.setVgrow(textBox, Priority.ALWAYS);
         vBox.getChildren().add(menuBox);
-        vBox.getChildren().add(textBox);
+
+        HBox directoryAndTextarea = new HBox();
+        HBox.setHgrow(textBox, Priority.ALWAYS);
+        directoryAndTextarea.getChildren().addAll(sidebar, textBox);
+        vBox.getChildren().add(directoryAndTextarea);
+        VBox.setVgrow(directoryAndTextarea, Priority.ALWAYS);
         _stage.setScene(new Scene(vBox));
         return this;
     }

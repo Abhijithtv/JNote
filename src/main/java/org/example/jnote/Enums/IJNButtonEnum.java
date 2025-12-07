@@ -4,6 +4,7 @@ public enum IJNButtonEnum {
     None,
     Save,
     Open,
+    OpenFolder,
     Close,
-    Other
+    Other,
 }

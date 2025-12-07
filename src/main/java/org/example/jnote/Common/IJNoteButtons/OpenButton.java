@@ -31,8 +31,12 @@ public class OpenButton extends IJNoteButton {
         if(file == null || !file.canRead()){
             return;
         }
+
         AccessLayer.file = file;
         AccessLayer.primaryTextArea.getPrimaryTextArea().clear();
+
+        //todo - make it async
+        SideBarEvents.Load();
 
         Files.lines(Path.of(file.getPath()))
                 .forEach(x-> {
@@ -40,7 +44,6 @@ public class OpenButton extends IJNoteButton {
                     AccessLayer.primaryTextArea.getPrimaryTextArea().appendText(line);
                 });
 
-        //todo - make it async
-        SideBarEvents.Load();
+
     }
 }

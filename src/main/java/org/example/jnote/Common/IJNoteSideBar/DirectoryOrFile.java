@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import org.example.jnote.AccessLayer;
 
 import java.io.File;
 import java.util.Optional;
@@ -12,7 +13,7 @@ import java.util.Optional;
 public class DirectoryOrFile extends HBox {
     private String _name;
     private boolean _isFile;
-    private File _file;
+    private File _fileOrDir;
 
 
     public DirectoryOrFile(String name, boolean isFile){
@@ -20,6 +21,7 @@ public class DirectoryOrFile extends HBox {
         this._isFile = isFile;
         this._init();
     }
+
 
     private void _init() {
         _loadUIElements();

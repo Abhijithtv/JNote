@@ -4,6 +4,7 @@ import javafx.stage.FileChooser;
 import org.example.jnote.AccessLayer;
 import org.example.jnote.Common.IJNoteButton;
 import org.example.jnote.Enums.IJNButtonEnum;
+import org.example.jnote.Events.SideBarEvents;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -39,5 +40,7 @@ public class OpenButton extends IJNoteButton {
                     AccessLayer.primaryTextArea.getPrimaryTextArea().appendText(line);
                 });
 
+        //todo - make it async
+        SideBarEvents.Load();
     }
 }

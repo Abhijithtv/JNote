@@ -44,7 +44,15 @@ public class PrimaryStageManager {
     public PrimaryStageManager loadControls(){
         _primaryMenu.initMenuOptions();
         _primaryTextArea.initTextArea();
+        _loadSidebar();
         return this;
+    }
+
+    private void _loadSidebar() {
+        var sideBar = new VBox();
+        sideBar.setPrefWidth(150);
+        sideBar.setStyle("-fx-background-color: #333;");
+        AccessLayer.sideBar = sideBar;
     }
 
     public PrimaryStageManager setTitle(String title){
@@ -61,42 +69,17 @@ public class PrimaryStageManager {
         HBox menuBox = _getMenuBox();
         AnchorPane textBox = _getTextBoxPane();
 
-        VBox sidebar = new VBox();
-        sidebar.setPrefWidth(150);
-        sidebar.setStyle("-fx-background-color: #333;");
-
-        Label label = new Label("D:");
-        Button openButton = new Button(">");
-
-        HBox btn1Wrapper = new HBox();
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-
-        btn1Wrapper.getChildren().addAll(label, spacer, openButton);
-        btn1Wrapper.setStyle(
-                "-fx-padding: 6 8;" +
-                        "-fx-background-color: #17468C;" +
-                        "-fx-border-color: transparent;"
-        );
-
-        label.setStyle("-fx-text-fill: white;");
-
-        openButton.setStyle(
-                "-fx-background-color: #17468C;" +
-                        "-fx-text-fill: white;" +
-                        "-fx-border-color: transparent;"
-        );
-        sidebar.getChildren().add(btn1Wrapper);
-
         VBox vBox = new VBox();
         vBox.getChildren().add(menuBox);
 
-
         HBox directoryAndTextarea = new HBox();
         HBox.setHgrow(textBox, Priority.ALWAYS);
-        directoryAndTextarea.getChildren().addAll(sidebar, textBox);
+
+        directoryAndTextarea.getChildren().addAll(AccessLayer.sideBar, textBox);
+
         vBox.getChildren().add(directoryAndTextarea);
         VBox.setVgrow(directoryAndTextarea, Priority.ALWAYS);
+
         _stage.setScene(new Scene(vBox));
         return this;
     }

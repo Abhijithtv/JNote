@@ -1,12 +1,14 @@
 package org.example.jnote.Primary;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.jnote.AccessLayer;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class PrimaryStageManager {
     private final PrimaryMenu _primaryMenu;
@@ -63,9 +65,32 @@ public class PrimaryStageManager {
         sidebar.setPrefWidth(150);
         sidebar.setStyle("-fx-background-color: #333;");
 
+        Label label = new Label("D:");
+        Button openButton = new Button(">");
+
+        HBox btn1Wrapper = new HBox();
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        btn1Wrapper.getChildren().addAll(label, spacer, openButton);
+        btn1Wrapper.setStyle(
+                "-fx-padding: 6 8;" +
+                        "-fx-background-color: #17468C;" +
+                        "-fx-border-color: transparent;"
+        );
+
+        label.setStyle("-fx-text-fill: white;");
+
+        openButton.setStyle(
+                "-fx-background-color: #17468C;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-border-color: transparent;"
+        );
+        sidebar.getChildren().add(btn1Wrapper);
 
         VBox vBox = new VBox();
         vBox.getChildren().add(menuBox);
+
 
         HBox directoryAndTextarea = new HBox();
         HBox.setHgrow(textBox, Priority.ALWAYS);

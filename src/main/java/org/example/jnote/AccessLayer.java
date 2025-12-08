@@ -1,6 +1,7 @@
 package org.example.jnote;
 
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.jnote.Primary.PrimaryTextArea;
 
@@ -11,4 +12,5 @@ public class AccessLayer {
     public static PrimaryTextArea primaryTextArea;
     public static File file;
     public static DependencyResolver DI;
+    public static VBox sideBar;
 }

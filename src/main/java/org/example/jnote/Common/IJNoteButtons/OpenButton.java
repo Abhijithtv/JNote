@@ -4,6 +4,7 @@ import javafx.stage.FileChooser;
 import org.example.jnote.AccessLayer;
 import org.example.jnote.Common.IJNoteButton;
 import org.example.jnote.Enums.IJNButtonEnum;
+import org.example.jnote.Events.SideBarEvents;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -27,14 +28,22 @@ public class OpenButton extends IJNoteButton {
     private void triggerOpen() throws IOException {
         FileChooser fil_chooser = new FileChooser();
         var file = fil_chooser.showOpenDialog(AccessLayer.stage);
-        if(file != null && file.canRead()){
-            AccessLayer.file = file;
-            AccessLayer.primaryTextArea.getPrimaryTextArea().clear();
-            Files.lines(Path.of(file.getPath()))
-                    .forEach(x-> {
-                        var line = new String(x.getBytes(StandardCharsets.UTF_8));
-                        AccessLayer.primaryTextArea.getPrimaryTextArea().appendText(line);
-                    });
+        if(file == null || !file.canRead()){
+            return;
         }
+
+        AccessLayer.file = file;
+        AccessLayer.primaryTextArea.getPrimaryTextArea().clear();
+
+        //todo - make it async
+        SideBarEvents.Load();
+
+        Files.lines(Path.of(file.getPath()))
+                .forEach(x-> {
+                    var line = new String(x.getBytes(StandardCharsets.UTF_8));
+                    AccessLayer.primaryTextArea.getPrimaryTextArea().appendText(line);
+                });
+
+
     }
 }

@@ -27,8 +27,9 @@ public class PrimaryMenu {
         _optionList.add((btnMgr.getInstance("Search", IJNButtonEnum.Other)));
 
         //todo - move them to a sub menu
-        _optionList.add((btnMgr.getInstance("Save", IJNButtonEnum.Save)));
-        _optionList.add((btnMgr.getInstance("Open", IJNButtonEnum.Open)));
+        _optionList.add(btnMgr.getInstance("Save", IJNButtonEnum.Save));
+        _optionList.add(btnMgr.getInstance("Open", IJNButtonEnum.Open));
+        _optionList.add(btnMgr.getInstance("OpenFolder", IJNButtonEnum.OpenFolder));
     }
 
 

@@ -1,10 +1,7 @@
 package org.example.jnote.Builders;
 
 import org.example.jnote.Common.IJNoteButton;
-import org.example.jnote.Common.IJNoteButtons.CloseButton;
-import org.example.jnote.Common.IJNoteButtons.DynamicButton;
-import org.example.jnote.Common.IJNoteButtons.OpenButton;
-import org.example.jnote.Common.IJNoteButtons.SaveButton;
+import org.example.jnote.Common.IJNoteButtons.*;
 import org.example.jnote.Enums.IJNButtonEnum;
 
 public class ButtonBuilder {
@@ -22,6 +19,9 @@ public class ButtonBuilder {
                 break;
             case IJNButtonEnum.Open:
                 btn = new OpenButton(name);
+                break;
+            case IJNButtonEnum.OpenFolder:
+                btn = new OpenFolderButton(name);
                 break;
             default:
                 throw new Exception("Unknown Button Type");

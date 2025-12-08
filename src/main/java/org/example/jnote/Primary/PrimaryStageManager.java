@@ -1,9 +1,14 @@
 package org.example.jnote.Primary;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.jnote.AccessLayer;
+
+import javax.swing.*;
 
 public class PrimaryStageManager {
     private final PrimaryMenu _primaryMenu;
@@ -39,7 +44,15 @@ public class PrimaryStageManager {
     public PrimaryStageManager loadControls(){
         _primaryMenu.initMenuOptions();
         _primaryTextArea.initTextArea();
+        _loadSidebar();
         return this;
+    }
+
+    private void _loadSidebar() {
+        var sideBar = new VBox();
+        sideBar.setPrefWidth(150);
+        sideBar.setStyle("-fx-background-color: #333;");
+        AccessLayer.sideBar = sideBar;
     }
 
     public PrimaryStageManager setTitle(String title){
@@ -57,9 +70,16 @@ public class PrimaryStageManager {
         AnchorPane textBox = _getTextBoxPane();
 
         VBox vBox = new VBox();
-        VBox.setVgrow(textBox, Priority.ALWAYS);
         vBox.getChildren().add(menuBox);
-        vBox.getChildren().add(textBox);
+
+        HBox directoryAndTextarea = new HBox();
+        HBox.setHgrow(textBox, Priority.ALWAYS);
+
+        directoryAndTextarea.getChildren().addAll(AccessLayer.sideBar, textBox);
+
+        vBox.getChildren().add(directoryAndTextarea);
+        VBox.setVgrow(directoryAndTextarea, Priority.ALWAYS);
+
         _stage.setScene(new Scene(vBox));
         return this;
     }
